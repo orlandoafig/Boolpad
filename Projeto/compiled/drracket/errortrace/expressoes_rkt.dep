@@ -1,0 +1,1 @@
+("6.12" ("0e6e0c426dd472b59f7bedb60e312a5157bc5e63" . "ad9ac64c70a6d70b09a34c1021a7add69b787a5d") #"C:\\Users\\Daniel\\Documents\\TCC\\Projeto\\letras.rkt" (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"class.rkt") (collects #"racket" #"gui.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))

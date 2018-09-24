@@ -1,0 +1,35 @@
+#lang racket
+
+(require racket/match
+         "expressoes.rkt")
+
+;; Definindo regras booleanas
+
+; Idempotente
+(define (idem expr)
+  (match expr
+    [`(ou ,a ,a) a]
+    [`(e ,a ,a) a]))
+
+; Comutativo
+(define (comm expr)
+  (match expr
+    [`(ou ,a ,b) `(ou ,b ,a)]
+    [`(e ,a ,b) `(e ,b ,a)]))
+
+; Evidência
+(define (evid expr)
+  (match expr
+     [`(ou ,a (e ,a ,b)) `(e ,a (ou 1 ,b))]))
+
+; De Morgan
+(define (dm expr)
+  (match expr
+    [`(not (ou ,a ,b)) `(e (not ,a) (not ,b))]
+    [`(not (e ,a ,b)) `(ou (not ,a) (not ,b))]))
+
+; Distributiva
+(define (dist expr)
+  (match expr
+    [`(e ,a (ou ,b ,c)) `(ou (e ,a ,b) (e ,a ,c))]
+    [`(ou ,a (e ,b ,c)) `(e (ou ,a ,b) (ou ,a ,c))]))
