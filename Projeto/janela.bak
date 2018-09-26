@@ -1,2 +1,88 @@
 #lang racket
 
+(require racket/gui
+         racket/class
+         "letras.rkt"
+         "expressoes.rkt"
+         games/cards)
+
+(provide f tab)
+
+;; Janela
+
+(define f (new frame%
+               [label "Learning Boolean Algebra"]
+               [width 1366]
+               [height 730]
+               [alignment '(center center)]))
+
+; Canvas para edição
+(define my-canvas (new editor-canvas%
+                       [parent f]
+                       [style '(no-hscroll no-vscroll)]))
+
+; Tipo de editor do canvas
+(define pb (new pasteboard%))
+(send my-canvas set-editor pb)
+
+;; Impressão das expressões exemplo na tela
+
+(define (pretty-print expr)
+  (send pb insert A 400 300)
+  (send pb insert ou 471 300)
+  (send pb insert B 542 300))
+
+;; Menus
+
+; Barra de menu
+(define mb (new menu-bar% [parent f]))
+
+; Menu controlador de evento
+;(define mc (new control-event% [event-type 'menu]))
+
+; Menu exemplos
+(define m-exemplos (new menu% [label "Exemplos"] [parent mb]))
+
+; Exemplo 1
+(define exemplo1 (new menu-item%
+                      [label "A + B"]
+                      [parent m-exemplos]
+                      [callback (lambda _ (pretty-print expr1))]))
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;   Usando games/cards    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Table (janela)
+(define tab (make-table "Learning Boolean Algebra" 19 7))
+
+; Menu
+(define mbar (make-object menu-bar% tab))
+(define exemplos-menu (new menu% [label "Exemplos"] [parent mbar]))
+
+; Exemplo 1
+(define exemp1 (new menu-item%
+                    [label "A + B"]
+                    [parent exemplos-menu]
+                    [callback (lambda _ (pretty-print expr1))]))
+
+; Região da expressão
+;(define region-expr ())
+
+(send tab add-card a-card 50 50)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

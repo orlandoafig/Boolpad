@@ -51,13 +51,10 @@
 
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;   Usando games/cards    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
-
-;;; Usando games/cards
-
-; Table (janela)
+; Table (frame)
 (define tab (make-table "Learning Boolean Algebra" 19 7))
 
 ; Menu
@@ -74,6 +71,7 @@
 ;(define region-expr ())
 
 (send tab add-card a-card 50 50)
+(send tab card-face-up a-card)
 
 
 
