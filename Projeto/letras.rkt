@@ -4,7 +4,7 @@
          racket/class
          games/cards)
 
-(provide A B C D ou a-card)
+(provide A B C D ou a-card ALTURA-OBJETO LARGURA-OBJETO)
 
 ;---------------------------------------- Usando snips --------------------------------------------;
 
@@ -23,11 +23,43 @@
 
 ;------------------------------------ Usando games/cards -------------------------------------;
 
+; Criando as letras
 (define a-bit (make-object bitmap% "imagens/LetraA.png" 'png))
 (define a-card (make-card a-bit #f 1 1))
 
 (define b-bit (make-object bitmap% "imagens/LetraB.png" 'png))
 (define b-card (make-card b-bit #f 1 1))
+
+(define c-bit (make-object bitmap% "imagens/LetraC.png" 'png))
+(define c-card (make-card b-bit #f 1 1))
+
+(define d-bit (make-object bitmap% "imagens/LetraD.png" 'png))
+(define d-card (make-card b-bit #f 1 1))
+
+(define ou-bit (make-object bitmap% "imagens/OperadorOR.png" 'png))
+(define ou-card (make-card b-bit #f 1 1))
+
+; Dimensoes dos objetos
+(define ALTURA-OBJETO 96)
+(define LARGURA-OBJETO 71)
+
+; Tirando o virar carta do duplo click
+(send a-card user-can-flip #f)
+(send b-card user-can-flip #f)
+(send c-card user-can-flip #f)
+(send d-card user-can-flip #f)
+(send ou-card user-can-flip #f)
+
+
+
+
+
+
+
+
+
+
+
 
 
 

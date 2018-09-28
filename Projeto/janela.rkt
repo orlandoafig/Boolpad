@@ -61,14 +61,17 @@
 (define mbar (make-object menu-bar% tab))
 (define exemplos-menu (new menu% [label "Exemplos"] [parent mbar]))
 
-; Exemplo 1
-(define exemp1 (new menu-item%
-                    [label "A + B"]
-                    [parent exemplos-menu]
-                    [callback (lambda _ (pretty-print expr1))]))
+;; Estrutura das expressões
+(define expr1-region (make-region 100 300 (* 3 LARGURA-OBJETO) ALTURA-OBJETO #f))
 
-; Região da expressão
-;(define region-expr ())
+;; Impressão das expressões exemplo na tela
+(define expr1 (send tab add-region expr1-region))
+
+; Exemplo 1
+(define exemp1-item (new menu-item%
+                         [label "A + B"]
+                         [parent exemplos-menu]
+                         [callback (lambda _ (expr1))]))
 
 (send tab add-card a-card 50 50)
 (send tab card-face-up a-card)
