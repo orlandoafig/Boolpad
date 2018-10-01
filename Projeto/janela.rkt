@@ -61,20 +61,39 @@
 (define mbar (make-object menu-bar% tab))
 (define exemplos-menu (new menu% [label "Exemplos"] [parent mbar]))
 
-;; Estrutura das expressões
-(define expr1-region (make-region 100 300 (* 3 LARGURA-OBJETO) ALTURA-OBJETO #f))
-
 ;; Impressão das expressões exemplo na tela
-(define expr1 (send tab add-region expr1-region))
+(define (expressao num-item)
+  (cond
+    [(= num-item 1) (send tab add-region expr1-region)
+                    (send tab add-cards-to-region (list a-card) expr1-region)
+                    ; Mantendo na regiao
+                    (send a-card home-region expr1-region)
+                    (send b-card home-region expr1-region)
+                    (send ou-card home-region expr1-region)]
+    [(= num-item 2) (send tab add-region expr2-region)
+                    ; Mantendo na regiao
+                    (send a-card home-region expr2-region)
+                    (send b-card home-region expr2-region)
+                    (send ou-card home-region expr2-region)]))
 
 ; Exemplo 1
 (define exemp1-item (new menu-item%
                          [label "A + B"]
                          [parent exemplos-menu]
-                         [callback (lambda _ (expr1))]))
+                         [callback (lambda _ (expressao 1))]))
+
+; Exemplo 2
+(define exemp2-item (new menu-item%
+                         [label "A + AB"]
+                         [parent exemplos-menu]
+                         [callback (lambda _ (expressao 2))]))
 
 (send tab add-card a-card 50 50)
 (send tab card-face-up a-card)
+(send tab card-face-up b-card)
+(send tab card-face-up c-card)
+(send tab card-face-up d-card)
+(send tab card-face-up ou-card)
 
 
 

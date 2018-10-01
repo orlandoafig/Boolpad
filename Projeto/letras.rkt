@@ -4,7 +4,14 @@
          racket/class
          games/cards)
 
-(provide A B C D ou a-card ALTURA-OBJETO LARGURA-OBJETO)
+(provide A B C D ou
+         a-card
+         b-card
+         c-card
+         d-card
+         ou-card
+         ALTURA-OBJETO
+         LARGURA-OBJETO)
 
 ;---------------------------------------- Usando snips --------------------------------------------;
 
@@ -39,7 +46,7 @@
 (define ou-bit (make-object bitmap% "imagens/OperadorOR.png" 'png))
 (define ou-card (make-card b-bit #f 1 1))
 
-; Dimensoes dos objetos
+; Dimensoes das imagens
 (define ALTURA-OBJETO 96)
 (define LARGURA-OBJETO 71)
 
@@ -49,7 +56,6 @@
 (send c-card user-can-flip #f)
 (send d-card user-can-flip #f)
 (send ou-card user-can-flip #f)
-
 
 
 

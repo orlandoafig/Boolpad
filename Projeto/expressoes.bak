@@ -1,4 +1,18 @@
 #lang racket
 
 (require racket/gui
-         racket/class)
+         racket/class
+         "letras.rkt")
+
+(provide expr1
+         expr2
+         expr3)
+
+;; Definindo expressões exemplos
+
+(define expr1 `(ou A B))
+(define expr2 `(ou A (e A B)))
+(define expr3 `(ou A A))
+
+;; Estrutura das expressões
+(define expr1-region (make-region 500 300 (* 3 LARGURA-OBJETO) ALTURA-OBJETO "A+B" #f))
