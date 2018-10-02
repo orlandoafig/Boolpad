@@ -9,9 +9,7 @@
          b-card
          c-card
          d-card
-         ou-card
-         ALTURA-OBJETO
-         LARGURA-OBJETO)
+         ou-card)
 
 ;---------------------------------------- Usando snips --------------------------------------------;
 
@@ -45,10 +43,6 @@
 
 (define ou-bit (make-object bitmap% "imagens/OperadorOR.png" 'png))
 (define ou-card (make-card ou-bit #f 1 1))
-
-; Dimensoes das imagens
-(define ALTURA-OBJETO 96)
-(define LARGURA-OBJETO 71)
 
 ; Tirando o virar carta do duplo click
 (send a-card user-can-flip #f)

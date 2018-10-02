@@ -4,7 +4,8 @@
          racket/class
          "letras.rkt"
          "expressoes.rkt"
-         games/cards)
+         games/cards
+         "const.rkt")
 
 (provide f tab)
 
@@ -12,8 +13,8 @@
 
 (define f (new frame%
                [label "Learning Boolean Algebra"]
-               [width 1366]
-               [height 730]
+               [width ALTURA-JANELA]
+               [height LARGURA-JANELA]
                [alignment '(center center)]))
 
 ; Canvas para edição
@@ -29,13 +30,13 @@
 
 (define (express item)
   (cond
-    [(= item 1) (send pb insert A 400 300)
-                (send pb insert ou 471 300)
-                (send pb insert B 542 300)]
-    [(= item 2) (send pb insert A 400 300)
-                (send pb insert ou 471 300)
-                (send pb insert A 542 300)
-                (send pb insert B 614 300)]))
+    [(= item 1) (send pb insert A 400 ALTURA-EXPRESSAO)
+                (send pb insert ou 471 ALTURA-EXPRESSAO)
+                (send pb insert B 542 ALTURA-EXPRESSAO)]
+    [(= item 2) (send pb insert A 400 ALTURA-EXPRESSAO)
+                (send pb insert ou 471 ALTURA-EXPRESSAO)
+                (send pb insert A 542 ALTURA-EXPRESSAO)
+                (send pb insert B 614 ALTURA-EXPRESSAO)]))
 
 ;; Menus
 

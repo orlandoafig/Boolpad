@@ -1,9 +1,9 @@
 #lang racket
 
 (require racket/gui
-         racket/class
          "letras.rkt"
-         games/cards)
+         games/cards
+         "const.rkt")
 
 (provide expr1 expr1-region
          expr2 expr2-region
