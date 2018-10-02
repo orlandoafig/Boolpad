@@ -27,10 +27,15 @@
 
 ;; Impressão das expressões exemplo na tela
 
-(define (pretty-print expr)
-  (send pb insert A 400 300)
-  (send pb insert ou 471 300)
-  (send pb insert B 542 300))
+(define (express item)
+  (cond
+    [(= item 1) (send pb insert A 400 300)
+                (send pb insert ou 471 300)
+                (send pb insert B 542 300)]
+    [(= item 2) (send pb insert A 400 300)
+                (send pb insert ou 471 300)
+                (send pb insert A 542 300)
+                (send pb insert B 614 300)]))
 
 ;; Menus
 
@@ -47,7 +52,13 @@
 (define exemplo1 (new menu-item%
                       [label "A + B"]
                       [parent m-exemplos]
-                      [callback (lambda _ (pretty-print expr1))]))
+                      [callback (lambda _ (express 1))]))
+
+; Exemplo 2
+(define exemplo2 (new menu-item%
+                      [label "A + AB"]
+                      [parent m-exemplos]
+                      [callback (lambda _ (express 2))]))
 
 
 
@@ -65,12 +76,13 @@
 (define (expressao num-item)
   (cond
     [(= num-item 1) (send tab add-region expr1-region)
-                    (send tab add-cards-to-region (list a-card) expr1-region)
+                    (send tab add-cards-to-region (list b-card ou-card a-card) expr1-region)
                     ; Mantendo na regiao
                     (send a-card home-region expr1-region)
                     (send b-card home-region expr1-region)
                     (send ou-card home-region expr1-region)]
     [(= num-item 2) (send tab add-region expr2-region)
+                    (send tab add-cards-to-region (list b-card a-card ou-card a-card) expr1-region)
                     ; Mantendo na regiao
                     (send a-card home-region expr2-region)
                     (send b-card home-region expr2-region)
@@ -88,7 +100,6 @@
                          [parent exemplos-menu]
                          [callback (lambda _ (expressao 2))]))
 
-(send tab add-card a-card 50 50)
 (send tab card-face-up a-card)
 (send tab card-face-up b-card)
 (send tab card-face-up c-card)

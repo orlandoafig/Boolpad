@@ -38,13 +38,13 @@
 (define b-card (make-card b-bit #f 1 1))
 
 (define c-bit (make-object bitmap% "imagens/LetraC.png" 'png))
-(define c-card (make-card b-bit #f 1 1))
+(define c-card (make-card c-bit #f 1 1))
 
 (define d-bit (make-object bitmap% "imagens/LetraD.png" 'png))
-(define d-card (make-card b-bit #f 1 1))
+(define d-card (make-card d-bit #f 1 1))
 
 (define ou-bit (make-object bitmap% "imagens/OperadorOR.png" 'png))
-(define ou-card (make-card b-bit #f 1 1))
+(define ou-card (make-card ou-bit #f 1 1))
 
 ; Dimensoes das imagens
 (define ALTURA-OBJETO 96)

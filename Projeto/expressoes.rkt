@@ -15,13 +15,15 @@
 (define expr2 `(ou A (e A B)))
 (define expr3 `(ou A A))
 
-;; Estrutura das expressões
+;------------------------------------------------games/cards---------------------------------;
+
+;; Estrutura das expressões com region
 
 ; A + B
-(define expr1-region (make-region 500 300 (* 4 LARGURA-OBJETO) (+ 50 ALTURA-OBJETO) "A + B" #f))
+(define expr1-region (make-region 500 300 (* 3 LARGURA-OBJETO) ALTURA-OBJETO #f #f))
 
 ; A + AB
-(define expr2-region (make-region 500 300 (* 4 LARGURA-OBJETO) ALTURA-OBJETO "A + AB" #f))
+(define expr2-region (make-region 500 300 (* 5 LARGURA-OBJETO) ALTURA-OBJETO #f #f))
 
 
 
