@@ -7,8 +7,8 @@
 ;---------------------------------- Constantes ---------------------------------;
 
 ;; Dimensões da janela
-(define ALTURA-JANELA 1366)
-(define LARGURA-JANELA 730)
+(define ALTURA-JANELA 730)
+(define LARGURA-JANELA 1366)
 
 
 ; Dimensoes das imagens
@@ -17,4 +17,4 @@
 
 
 ;; Altura da expressão na tela
-(define ALTURA-EXPRESSAO 250)
+(define ALTURA-EXPRESSAO (/ ALTURA-JANELA 3))

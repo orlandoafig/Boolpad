@@ -13,8 +13,8 @@
 
 (define f (new frame%
                [label "Learning Boolean Algebra"]
-               [width ALTURA-JANELA]
-               [height LARGURA-JANELA]
+               [width LARGURA-JANELA]
+               [height ALTURA-JANELA]
                [alignment '(center center)]))
 
 ; Canvas para edição
