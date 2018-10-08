@@ -30,13 +30,13 @@
 
 (define (express item)
   (cond
-    [(= item 1) (send pb insert A 400 ALTURA-EXPRESSAO)
-                (send pb insert ou 471 ALTURA-EXPRESSAO)
-                (send pb insert B 542 ALTURA-EXPRESSAO)]
-    [(= item 2) (send pb insert A 400 ALTURA-EXPRESSAO)
-                (send pb insert ou 471 ALTURA-EXPRESSAO)
-                (send pb insert A 542 ALTURA-EXPRESSAO)
-                (send pb insert B 614 ALTURA-EXPRESSAO)]))
+    [(= item 1) (print-a pb 400)
+                (print-ou pb 471)
+                (print-b pb 542)]
+    [(= item 2) (print-a pb 400)
+                (print-ou pb 471)
+                (print-a pb 542)
+                (print-b pb 613)]))
 
 ;; Menus
 
