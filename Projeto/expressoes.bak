@@ -1,11 +1,12 @@
 #lang racket
 
 (require racket/gui
-         racket/class
-         "letras.rkt")
+         "letras.rkt"
+         games/cards
+         "const.rkt")
 
-(provide expr1
-         expr2
+(provide expr1 expr1-region
+         expr2 expr2-region
          expr3)
 
 ;; Definindo expressões exemplos
@@ -14,5 +15,30 @@
 (define expr2 `(ou A (e A B)))
 (define expr3 `(ou A A))
 
-;; Estrutura das expressões
-(define expr1-region (make-region 500 300 (* 3 LARGURA-OBJETO) ALTURA-OBJETO "A+B" #f))
+;------------------------------------------------games/cards---------------------------------;
+
+;; Estrutura das expressões com region
+
+; A + B
+(define expr1-region (make-region 500 300 (* 3 LARGURA-OBJETO) ALTURA-OBJETO #f #f))
+
+; A + AB
+(define expr2-region (make-region 500 300 (* 5 LARGURA-OBJETO) ALTURA-OBJETO #f #f))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

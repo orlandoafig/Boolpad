@@ -6,7 +6,7 @@
          "const.rkt")
 
 (provide A B C D ou
-         print-a
+         print-a print-a-dois
          print-b
          print-c
          print-d
@@ -23,6 +23,8 @@
 
 (define A (make-object image-snip% "imagens/LetraA.png" 'png))
 
+(define A-dois (make-object image-snip% "imagens/LetraA.png" 'png))
+
 (define B (make-object image-snip% "imagens/LetraB.png" 'png))
 
 (define C (make-object image-snip% "imagens/LetraC.png" 'png))
@@ -34,6 +36,7 @@
 ;; Print de cada letra
 
 (define (print-a tela x) (send tela insert A x ALTURA-EXPRESSAO))
+(define (print-a-dois tela x) (send tela insert A-dois x ALTURA-EXPRESSAO))
 
 (define (print-b tela x) (send tela insert B x ALTURA-EXPRESSAO))
 
