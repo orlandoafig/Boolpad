@@ -1,4 +1,4 @@
-#lang racket
+(module letras racket
 
 (provide ALTURA-JANELA LARGURA-JANELA
          ALTURA-OBJETO LARGURA-OBJETO
@@ -7,8 +7,8 @@
 ;---------------------------------- Constantes ---------------------------------;
 
 ;; Dimensões da janela
-(define ALTURA-JANELA 730)
-(define LARGURA-JANELA 1366)
+(define ALTURA-JANELA 600)
+(define LARGURA-JANELA 1000)
 
 
 ; Dimensoes das imagens
@@ -18,3 +18,21 @@
 
 ;; Altura da expressão na tela
 (define ALTURA-EXPRESSAO (/ ALTURA-JANELA 3))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+)

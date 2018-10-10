@@ -2,9 +2,15 @@
 
 (require racket/gui
          racket/class
-         games/cards)
+         games/cards
+         "const.rkt")
 
 (provide A B C D ou
+         print-a print-a-dois
+         print-b
+         print-c
+         print-d
+         print-ou
          a-card
          b-card
          c-card
@@ -17,6 +23,8 @@
 
 (define A (make-object image-snip% "imagens/LetraA.png" 'png))
 
+(define A-dois (make-object image-snip% "imagens/LetraA.png" 'png))
+
 (define B (make-object image-snip% "imagens/LetraB.png" 'png))
 
 (define C (make-object image-snip% "imagens/LetraC.png" 'png))
@@ -24,6 +32,19 @@
 (define D (make-object image-snip% "imagens/LetraD.png" 'png))
 
 (define ou (make-object image-snip% "imagens/OperadorOR.png" 'png))
+
+;; Print de cada letra
+
+(define (print-a tela x) (send tela insert A x ALTURA-EXPRESSAO))
+(define (print-a-dois tela x) (send tela insert A-dois x ALTURA-EXPRESSAO))
+
+(define (print-b tela x) (send tela insert B x ALTURA-EXPRESSAO))
+
+(define (print-c tela x) (send tela insert C x ALTURA-EXPRESSAO))
+
+(define (print-d tela x) (send tela insert D x ALTURA-EXPRESSAO))
+
+(define (print-ou tela x) (send tela insert ou x ALTURA-EXPRESSAO))
 
 
 ;------------------------------------ Usando games/cards -------------------------------------;

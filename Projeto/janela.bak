@@ -7,7 +7,7 @@
          games/cards
          "const.rkt")
 
-(provide f tab)
+(provide f tab expr-atual)
 
 ;; Janela
 
@@ -28,23 +28,24 @@
 
 ;; Impressão das expressões exemplo na tela
 
-(define (express item)
+(define expr-atual null)
+
+(define (expressao item)
   (cond
-    [(= item 1) (send pb insert A 400 ALTURA-EXPRESSAO)
-                (send pb insert ou 471 ALTURA-EXPRESSAO)
-                (send pb insert B 542 ALTURA-EXPRESSAO)]
-    [(= item 2) (send pb insert A 400 ALTURA-EXPRESSAO)
-                (send pb insert ou 471 ALTURA-EXPRESSAO)
-                (send pb insert A 542 ALTURA-EXPRESSAO)
-                (send pb insert B 614 ALTURA-EXPRESSAO)]))
+    [(= item 1) (print-a pb 400)
+                (print-ou pb 471)
+                (print-b pb 542)
+                (set! expr-atual expr1)]
+    [(= item 2) (print-a pb 400)
+                (print-ou pb 471)
+                (print-a-dois pb 542)
+                (print-b pb 613)
+                (set! expr-atual expr2)]))
 
 ;; Menus
 
 ; Barra de menu
 (define mb (new menu-bar% [parent f]))
-
-; Menu controlador de evento
-;(define mc (new control-event% [event-type 'menu]))
 
 ; Menu exemplos
 (define m-exemplos (new menu% [label "Exemplos"] [parent mb]))
@@ -53,13 +54,13 @@
 (define exemplo1 (new menu-item%
                       [label "A + B"]
                       [parent m-exemplos]
-                      [callback (lambda _ (express 1))]))
+                      [callback (lambda _ (expressao 1))]))
 
 ; Exemplo 2
 (define exemplo2 (new menu-item%
                       [label "A + AB"]
                       [parent m-exemplos]
-                      [callback (lambda _ (express 2))]))
+                      [callback (lambda _ (expressao 2))]))
 
 
 
@@ -74,7 +75,7 @@
 (define exemplos-menu (new menu% [label "Exemplos"] [parent mbar]))
 
 ;; Impressão das expressões exemplo na tela
-(define (expressao num-item)
+(define (express num-item)
   (cond
     [(= num-item 1) (send tab add-region expr1-region)
                     (send tab add-cards-to-region (list b-card ou-card a-card) expr1-region)
@@ -93,13 +94,13 @@
 (define exemp1-item (new menu-item%
                          [label "A + B"]
                          [parent exemplos-menu]
-                         [callback (lambda _ (expressao 1))]))
+                         [callback (lambda _ (express 1))]))
 
 ; Exemplo 2
 (define exemp2-item (new menu-item%
                          [label "A + AB"]
                          [parent exemplos-menu]
-                         [callback (lambda _ (expressao 2))]))
+                         [callback (lambda _ (express 2))]))
 
 (send tab card-face-up a-card)
 (send tab card-face-up b-card)
