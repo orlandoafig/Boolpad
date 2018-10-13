@@ -1,4 +1,4 @@
-#lang racket
+(module letras racket
 
 (require racket/match
          "expressoes.rkt")
@@ -33,3 +33,15 @@
   (match expr
     [`(e ,a (ou ,b ,c)) `(ou (e ,a ,b) (e ,a ,c))]
     [`(ou ,a (e ,b ,c)) `(e (ou ,a ,b) (ou ,a ,c))]))
+
+
+
+
+
+
+
+
+
+
+
+)

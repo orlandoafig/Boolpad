@@ -1,47 +1,52 @@
 (module letras racket
 
-(require racket/match
-         "expressoes.rkt")
+  (require racket/match)
 
-;; Definindo regras booleanas
+  (provide idem
+           comm
+           evid
+           dist
+           dm)
 
-; Idempotente
-(define (idem expr)
-  (match expr
-    [`(ou ,a ,a) a]
-    [`(e ,a ,a) a]))
+  ;; Definindo regras booleanas
 
-; Comutativo
-(define (comm expr)
-  (match expr
-    [`(ou ,a ,b) `(ou ,b ,a)]
-    [`(e ,a ,b) `(e ,b ,a)]))
+  ; Idempotente
+  (define (idem expr)
+    (match expr
+      [`(ou ,a ,a) a]
+      [`(e ,a ,a) a]))
 
-; Evidência
-(define (evid expr)
-  (match expr
-     [`(ou ,a (e ,a ,b)) `(e ,a (ou 1 ,b))]))
+  ; Comutativo
+  (define (comm expr)
+    (match expr
+      [`(ou ,a ,b) `(ou ,b ,a)]
+      [`(e ,a ,b) `(e ,b ,a)]))
 
-; De Morgan
-(define (dm expr)
-  (match expr
-    [`(not (ou ,a ,b)) `(e (not ,a) (not ,b))]
-    [`(not (e ,a ,b)) `(ou (not ,a) (not ,b))]))
+  ; Evidência
+  (define (evid expr)
+    (match expr
+      [`(ou ,a (e ,a ,b)) `(e ,a (ou 1 ,b))]))
 
-; Distributiva
-(define (dist expr)
-  (match expr
-    [`(e ,a (ou ,b ,c)) `(ou (e ,a ,b) (e ,a ,c))]
-    [`(ou ,a (e ,b ,c)) `(e (ou ,a ,b) (ou ,a ,c))]))
+  ; De Morgan
+  (define (dm expr)
+    (match expr
+      [`(not (ou ,a ,b)) `(e (not ,a) (not ,b))]
+      [`(not (e ,a ,b)) `(ou (not ,a) (not ,b))]))
 
-
-
-
-
-
-
+  ; Distributiva
+  (define (dist expr)
+    (match expr
+      [`(e ,a (ou ,b ,c)) `(ou (e ,a ,b) (e ,a ,c))]
+      [`(ou ,a (e ,b ,c)) `(e (ou ,a ,b) (ou ,a ,c))]))
 
 
 
 
-)
+
+
+
+
+
+
+
+  )

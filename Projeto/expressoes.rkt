@@ -1,37 +1,35 @@
 (module expressoes racket
 
-(require racket/gui
-         "letras.rkt"
-         games/cards
-         "const.rkt")
+  (require racket/gui
+           "letras.rkt"
+           "const.rkt")
 
-(provide expr1 expr1-region
-         expr2 expr2-region
-         expr3)
+  (provide expr1 expr2 expr3
+           print-var
+           pp)
 
-;; Definindo expressões exemplos
+  ;; Print da letra
+  (define (print-var item tela x)
+    (send tela insert item x ALTURA-EXPRESSAO)
+    (+ x LARGURA-OBJETO))
 
-(define expr1 `(ou A B))
-(define expr2 `(ou A (e A B)))
-(define expr3 `(ou A A))
+  ;; Definindo expressões exemplos
 
-;------------------------------------------------games/cards---------------------------------;
+  (define expr1 `(ou A B))
+  (define expr2 `(ou A (e A-dois B)))
+  (define expr3 `(ou A A-dois))
 
-;; Estrutura das expressões com region
-
-; A + B
-(define expr1-region (make-region 500 300 (* 3 LARGURA-OBJETO) ALTURA-OBJETO #f #f))
-
-; A + AB
-(define expr2-region (make-region 500 300 (* 5 LARGURA-OBJETO) ALTURA-OBJETO #f #f))
-
-
-
-
-
-
-
-
+  ;; Imprimir expressão na tela
+  (define (pp expr tela x)
+    (match expr
+      [m (print-var m tela x)]
+      [`(ou ,m ,n) (let* ([x1 (pp m tela x)]
+                          [x2 (print-var ou tela x1)]
+                          [x3 (pp n tela x2)])
+                     x3)]
+      [`(e ,m ,n) (let* ([x1 (pp m tela x)]
+                         [x2 (pp n tela x1)])
+                    x2)]))
 
 
 
@@ -42,4 +40,26 @@
 
 
 
-)
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  )
