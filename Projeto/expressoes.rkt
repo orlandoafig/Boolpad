@@ -10,25 +10,25 @@
 
   ;; Print da letra
   (define (print-var item tela x)
-    (send tela insert item x ALTURA-EXPRESSAO)
+    (define var (cria-var item))
+    (send tela insert var x ALTURA-EXPRESSAO)
     (+ x LARGURA-OBJETO))
 
   ;; Definindo expressões exemplos
-
-  (define expr1 `(ou A B))
-  (define expr2 `(ou A (e A-dois B)))
-  (define expr3 `(ou A A-dois))
+  (define expr1 `("ou" "A" "B"))
+  (define expr2 `("ou" "A" ("e" "A" "B")))
+  (define expr3 `("ou" "A" "A"))
 
   ;; Imprimir expressão na tela
   (define (pp expr tela x)
     (match expr
-      [`(ou ,m ,n) (let* ([x1 (pp m tela x)]
-                          [x2 (print-var ou tela x1)]
-                          [x3 (pp n tela x2)])
-                     x3)]
-      [`(e ,m ,n) (let* ([x1 (pp m tela x)]
-                         [x2 (pp n tela x1)])
-                    x2)]
+      [`("ou" ,m ,n) (let* ([x1 (pp m tela x)]
+                            [x2 (print-var "ou" tela x1)]
+                            [x3 (pp n tela x2)])
+                       x3)]
+      [`("e" ,m ,n) (let* ([x1 (pp m tela x)]
+                           [x2 (pp n tela x1)])
+                      x2)]
       [m (print-var m tela x)]))
 
 

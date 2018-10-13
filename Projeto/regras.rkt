@@ -13,8 +13,8 @@
   ; Idempotente
   (define (idem expr)
     (match expr
-      [`(ou ,a ,a) a]
-      [`(e ,a ,a) a]))
+      [`("ou" ,a ,a) "a"]
+      [`("e" ,a ,a) "a"]))
 
   ; Comutativo
   (define (comm expr)

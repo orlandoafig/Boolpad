@@ -34,11 +34,11 @@
          (pp expr1 pb 400)
          (set! expr-atual expr1)]
       [(= item 2)
-         (print-var A pb 400)
-         (print-var ou pb 471)
-         (print-var A-dois pb 542)
-         (print-var B pb 613)
-         (set! expr-atual expr2)]))
+         (pp expr2 pb 400)
+         (set! expr-atual expr2)]
+      [(= item 3)
+         (pp expr3 pb 400)
+         (set! expr-atual expr3)]))
 
   ;; Menus
 
@@ -59,6 +59,12 @@
                         [label "A + AB"]
                         [parent m-exemplos]
                         [callback (lambda _ (expressao 2))]))
+
+  ; Exemplo 3
+  (define exemplo3 (new menu-item%
+                        [label "A + A"]
+                        [parent m-exemplos]
+                        [callback (lambda _ (expressao 3))]))
 
 
 
