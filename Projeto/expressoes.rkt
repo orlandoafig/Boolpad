@@ -22,14 +22,14 @@
   ;; Imprimir expressão na tela
   (define (pp expr tela x)
     (match expr
-      [m (print-var m tela x)]
       [`(ou ,m ,n) (let* ([x1 (pp m tela x)]
                           [x2 (print-var ou tela x1)]
                           [x3 (pp n tela x2)])
                      x3)]
       [`(e ,m ,n) (let* ([x1 (pp m tela x)]
                          [x2 (pp n tela x1)])
-                    x2)]))
+                    x2)]
+      [m (print-var m tela x)]))
 
 
 
