@@ -4,7 +4,7 @@
            "letras.rkt"
            "const.rkt")
 
-  (provide expr1 expr2 expr3 expr4
+  (provide expr1 expr2 expr3 expr4 expr5
            pp)
   
   ;; Definindo expressões exemplos
@@ -12,6 +12,7 @@
   (define expr2 `("ou" "A" ("e" "A" "B")))
   (define expr3 `("ou" "A" "A"))
   (define expr4 `("group" ("ou" "A" "B")))
+  (define expr5 `("not" "A"))
 
   ;; Imprimir expressão na tela
   (define (pp expr tela x y)
@@ -19,17 +20,17 @@
       [`("ou" ,m ,n) (let*-values ([(x1 y1) (pp m tela x y)]
                                    [(x2 y2) (print-var "ou" tela x1 y)]
                                    [(x3 y3) (pp n tela x2 y)])
-                       (values x3 (max y1 y2 y3)))]
+                       (values x3 (min y1 y2 y3)))]
       [`("e" ,m ,n) (let*-values ([(x1 y1) (pp m tela x y)]
                                   [(x2 y2) (pp n tela x1 y)])
-                      (values x2 (max y1 y2)))]
-      [`("not" ,m) (let*-values ([(x1) (pp m x y)]
-                                 [(x2) (print-bar tela (count positive? m) x y)])
-                     x1)]
+                      (values x2 (min y1 y2)))]
+      [`("not" ,m) (let*-values ([(x1 y1) (pp m x y)]
+                                 [(x2 y2) (print-bar tela (count positive? m) x (- y ALTURA-BARRA))])
+                     (values x1 ))]
       [`("group" ,m) (let*-values ([(x1 y1) (print-var "abre-par" tela x y)]
                                    [(x2 y2) (pp m tela x1 y)]
                                    [(x3 y3) (print-var "fecha-par" tela x2 y)])
-                       (values x3 (max y1 y2 y3)))]
+                       (values x3 (min y1 y2 y3)))]
       [m (print-var m tela x y)]))
 
 

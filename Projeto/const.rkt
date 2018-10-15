@@ -2,7 +2,7 @@
 
   (provide ALTURA-JANELA LARGURA-JANELA
            ALTURA-OBJETO LARGURA-OBJETO
-           ALTURA-EXPRESSAO)
+           ALTURA-EXPRESSAO ALTURA-BARRA)
 
   ;---------------------------------- Constantes ---------------------------------;
 
@@ -14,6 +14,7 @@
   ; Dimensoes das imagens
   (define ALTURA-OBJETO 96)
   (define LARGURA-OBJETO 71)
+  (define ALTURA-BARRA )
 
 
   ;; Altura da expressão na tela
