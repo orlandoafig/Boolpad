@@ -31,16 +31,16 @@
     (send pb erase)
     (cond
       [(= item 1)
-         (pp expr1 pb 400)
+         (pp expr1 pb 400 ALTURA-EXPRESSAO)
          (set! expr-atual expr1)]
       [(= item 2)
-         (pp expr2 pb 400)
+         (pp expr2 pb 400 ALTURA-EXPRESSAO)
          (set! expr-atual expr2)]
       [(= item 3)
-         (pp expr3 pb 400)
+         (pp expr3 pb 400 ALTURA-EXPRESSAO)
          (set! expr-atual expr3)]
       [(= item 4)
-         (pp expr4 pb 400)
+         (pp expr4 pb 400 ALTURA-EXPRESSAO)
          (set! expr-atual expr4)]))
 
   ;; Menus

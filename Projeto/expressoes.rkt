@@ -5,7 +5,6 @@
            "const.rkt")
 
   (provide expr1 expr2 expr3 expr4
-           print-var
            pp)
   
   ;; Definindo expressões exemplos
@@ -14,37 +13,24 @@
   (define expr3 `("ou" "A" "A"))
   (define expr4 `("group" ("ou" "A" "B")))
 
-  ;; Print da letra
-  (define (print-var item tela x)
-    (define var (cria-var item))
-    (send tela insert var x ALTURA-EXPRESSAO)
-    (+ x LARGURA-OBJETO))
-
-  ;; Print da barra de negação
-  (define (print-bar tela qtd x y)
-    (for ([i qtd])
-      (define var (cria-var "barra"))
-      (send tela insert var x y)
-      (+ x )))
-
   ;; Imprimir expressão na tela
-  (define (pp expr tela x)
+  (define (pp expr tela x y)
     (match expr
-      [`("ou" ,m ,n) (let* ([x1 (pp m tela x)]
-                            [x2 (print-var "ou" tela x1)]
-                            [x3 (pp n tela x2)])
-                       x3)]
-      [`("e" ,m ,n) (let* ([x1 (pp m tela x)]
-                           [x2 (pp n tela x1)])
-                      x2)]
-      [`("not" ,m) (let* ([x1 (pp m x)]
-                          [x2 (print-bar tela )])
+      [`("ou" ,m ,n) (let*-values ([(x1 y1) (pp m tela x y)]
+                                   [(x2 y2) (print-var "ou" tela x1 y)]
+                                   [(x3 y3) (pp n tela x2 y)])
+                       (values x3 (max y1 y2 y3)))]
+      [`("e" ,m ,n) (let*-values ([(x1 y1) (pp m tela x y)]
+                                  [(x2 y2) (pp n tela x1 y)])
+                      (values x2 (max y1 y2)))]
+      [`("not" ,m) (let*-values ([(x1) (pp m x y)]
+                                 [(x2) (print-bar tela (count positive? m) x y)])
                      x1)]
-      [`("group" ,m) (let* ([x1 (print-var "abre-par" tela x)]
-                            [x2 (pp m tela x1)]
-                            [x3 (print-var "fecha-par" tela x2)])
-                       x3)]
-      [m (print-var m tela x)]))
+      [`("group" ,m) (let*-values ([(x1 y1) (print-var "abre-par" tela x y)]
+                                   [(x2 y2) (pp m tela x1 y)]
+                                   [(x3 y3) (print-var "fecha-par" tela x2 y)])
+                       (values x3 (max y1 y2 y3)))]
+      [m (print-var m tela x y)]))
 
 
 
