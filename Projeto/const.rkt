@@ -14,7 +14,7 @@
   ; Dimensoes das imagens
   (define ALTURA-OBJETO 96)
   (define LARGURA-OBJETO 71)
-  (define ALTURA-BARRA )
+  (define ALTURA-BARRA 10)
 
 
   ;; Altura da expressão na tela

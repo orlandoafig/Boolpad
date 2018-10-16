@@ -24,9 +24,12 @@
       [`("e" ,m ,n) (let*-values ([(x1 y1) (pp m tela x y)]
                                   [(x2 y2) (pp n tela x1 y)])
                       (values x2 (min y1 y2)))]
-      [`("not" ,m) (let*-values ([(x1 y1) (pp m x y)]
-                                 [(x2 y2) (print-bar tela (count positive? m) x (- y ALTURA-BARRA))])
-                     (values x1 ))]
+      [`("not" ,m) (let*-values ([(x1 y1) (pp m tela x y)]
+                                 [(x2 y2) (print-bar tela
+                                                     (if (list? m) (length m) 1)
+                                                     x
+                                                     (- y ALTURA-BARRA))])
+                     (values x1 y))]
       [`("group" ,m) (let*-values ([(x1 y1) (print-var "abre-par" tela x y)]
                                    [(x2 y2) (pp m tela x1 y)]
                                    [(x3 y3) (print-var "fecha-par" tela x2 y)])
