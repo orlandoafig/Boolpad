@@ -4,7 +4,7 @@
            "letras.rkt"
            "const.rkt")
 
-  (provide expr1 expr2 expr3 expr4 expr5
+  (provide expr1 expr2 expr3 expr4 expr5 expr6
            pp)
   
   ;; Definindo expressões exemplos
@@ -13,6 +13,7 @@
   (define expr3 `("ou" "A" "A"))
   (define expr4 `("group" ("ou" "A" "B")))
   (define expr5 `("not" "A"))
+  (define expr6 `("ou" ("not" ("e" "A" "B")) "A"))
 
   ;; Imprimir expressão na tela
   (define (pp expr tela x y)
@@ -20,7 +21,7 @@
       [`("ou" ,m ,n) (let*-values ([(x1 y1) (pp m tela x y)]
                                    [(x2 y2) (print-var "ou" tela x1 y)]
                                    [(x3 y3) (pp n tela x2 y)])
-                       (values x3 (min y1 y2 y3)))]
+                       (values x3 (min y1 y3)))]
       [`("e" ,m ,n) (let*-values ([(x1 y1) (pp m tela x y)]
                                   [(x2 y2) (pp n tela x1 y)])
                       (values x2 (min y1 y2)))]
@@ -28,7 +29,7 @@
                                  [(x2 y2) (print-bar tela
                                                      (if (list? m) (length m) 1)
                                                      x
-                                                     (- y ALTURA-BARRA))])
+                                                     (- y1 ALTURA-BARRA))])
                      (values x1 y))]
       [`("group" ,m) (let*-values ([(x1 y1) (print-var "abre-par" tela x y)]
                                    [(x2 y2) (pp m tela x1 y)]
