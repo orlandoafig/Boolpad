@@ -44,7 +44,10 @@
          (set! expr-atual expr4)]
       [(= item 5)
          (pp expr5 pb 400 ALTURA-EXPRESSAO)
-         (set! expr-atual expr5)]))
+         (set! expr-atual expr5)]
+      [(= item 6)
+         (pp expr6 pb 400 ALTURA-EXPRESSAO)
+         (set! expr-atual expr6)]))
 
   ;; Menus
 
@@ -83,6 +86,12 @@
                         [label "'A"]
                         [parent m-exemplos]
                         [callback (lambda _ (expressao 5))]))
+
+  ; Exemplo 6
+  (define exemplo6 (new menu-item%
+                        [label "'AB + A"]
+                        [parent m-exemplos]
+                        [callback (lambda _ (expressao 6))]))
 
 
 

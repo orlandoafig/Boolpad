@@ -83,13 +83,13 @@
 
   ; Exemplo 5
   (define exemplo5 (new menu-item%
-                        [label "'A"]
+                        [label "'('A)"]
                         [parent m-exemplos]
                         [callback (lambda _ (expressao 5))]))
 
   ; Exemplo 6
   (define exemplo6 (new menu-item%
-                        [label "'AB"]
+                        [label "'(AB) + A"]
                         [parent m-exemplos]
                         [callback (lambda _ (expressao 6))]))
 

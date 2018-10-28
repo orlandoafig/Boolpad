@@ -32,8 +32,10 @@
   (define (print-bar tela qtd x y)
     (for ([i qtd])
       (define var (cria-var "barra"))
-      (if (= i 0) (send tela insert var x y) (send tela insert var (+ x LARGURA-OBJETO) y))
-      (values (+ x LARGURA-OBJETO) y)))
+      (if (= i 0)
+          (send tela insert var x y)
+          (send tela insert var (+ x LARGURA-OBJETO) y)))
+    (values (* qtd LARGURA-OBJETO) y))
 
  
 
