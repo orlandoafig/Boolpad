@@ -8,12 +8,12 @@
            pp)
   
   ;; Definindo expressões exemplos
-  (define expr1 `("ou" "A" "B"))
-  (define expr2 `("ou" "A" ("e" "A" "B")))
-  (define expr3 `("ou" "A" "A"))
-  (define expr4 `("group" ("ou" "A" "B")))
-  (define expr5 `("not" ("not" "A")))
-  (define expr6 `("ou" ("not" ("e" "A" "B")) "A"))
+  (define expr1 '("ou" "A" "B"))
+  (define expr2 '("ou" "A" ("e" "A" "B")))
+  (define expr3 '("ou" "A" "A"))
+  (define expr4 '("group" ("ou" "A" "B")))
+  (define expr5 '("not" ("not" "A")))
+  (define expr6 '("ou" ("not" ("e" "A" "B")) "A"))
 
   ;; Imprimir expressão na tela
   (define (pp expr tela x y)
