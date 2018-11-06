@@ -57,6 +57,9 @@
   ; Menu exemplos
   (define m-exemplos (new menu% [label "Exemplos"] [parent mb]))
 
+  ; Menu regras
+  (define m-regras (new menu% [label "Regras"] [parent mb]))
+
   ; Exemplo 1
   (define exemplo1 (new menu-item%
                         [label "A + B"]
@@ -83,13 +86,13 @@
 
   ; Exemplo 5
   (define exemplo5 (new menu-item%
-                        [label "'A"]
+                        [label "'('A)"]
                         [parent m-exemplos]
                         [callback (lambda _ (expressao 5))]))
 
   ; Exemplo 6
   (define exemplo6 (new menu-item%
-                        [label "'AB + A"]
+                        [label "'(AB) + A"]
                         [parent m-exemplos]
                         [callback (lambda _ (expressao 6))]))
 

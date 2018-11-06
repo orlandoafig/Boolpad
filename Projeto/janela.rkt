@@ -2,9 +2,11 @@
 
   (require racket/gui
            racket/class
+           zippers
            "letras.rkt"
            "expressoes.rkt"
-           "const.rkt")
+           "const.rkt"
+           "regras.rkt")
 
   (provide f expr-atual)
 
@@ -24,10 +26,11 @@
   (define pb (new pasteboard%))
   (send my-canvas set-editor pb)
 
-  ;; Escolha das expressões exemplos e definição da expressão atual
+  ;; Escolha das expressões exemplos e definição da expressão atual zipper
   (define expr-atual null)
+  (define expr-atual-zip null)
 
-  (define (expressao item)
+  (define (exemplo item)
     (send pb erase)
     (cond
       [(= item 1)
@@ -47,7 +50,8 @@
          (set! expr-atual expr5)]
       [(= item 6)
          (pp expr6 pb 400 ALTURA-EXPRESSAO)
-         (set! expr-atual expr6)]))
+         (set! expr-atual expr6)])
+    (set! expr-atual-zip (zip expr-atual)))
 
   ;; Menus
 
@@ -57,44 +61,57 @@
   ; Menu exemplos
   (define m-exemplos (new menu% [label "Exemplos"] [parent mb]))
 
+  ; Menu regras
+  (define m-regras (new menu% [label "Regras"] [parent mb]))
+
   ; Exemplo 1
-  (define exemplo1 (new menu-item%
+  (define ex1 (new menu-item%
                         [label "A + B"]
                         [parent m-exemplos]
-                        [callback (lambda _ (expressao 1))]))
+                        [callback (lambda _ (exemplo 1))]))
 
   ; Exemplo 2
-  (define exemplo2 (new menu-item%
+  (define ex2 (new menu-item%
                         [label "A + AB"]
                         [parent m-exemplos]
-                        [callback (lambda _ (expressao 2))]))
+                        [callback (lambda _ (exemplo 2))]))
 
   ; Exemplo 3
-  (define exemplo3 (new menu-item%
+  (define ex3 (new menu-item%
                         [label "A + A"]
                         [parent m-exemplos]
-                        [callback (lambda _ (expressao 3))]))
+                        [callback (lambda _ (exemplo 3))]))
 
   ; Exemplo 4
-  (define exemplo4 (new menu-item%
+  (define ex4 (new menu-item%
                         [label "(A + B)"]
                         [parent m-exemplos]
-                        [callback (lambda _ (expressao 4))]))
+                        [callback (lambda _ (exemplo 4))]))
 
   ; Exemplo 5
-  (define exemplo5 (new menu-item%
+  (define ex5 (new menu-item%
                         [label "'('A)"]
                         [parent m-exemplos]
-                        [callback (lambda _ (expressao 5))]))
+                        [callback (lambda _ (exemplo 5))]))
 
   ; Exemplo 6
-  (define exemplo6 (new menu-item%
+  (define ex6 (new menu-item%
                         [label "'(AB) + A"]
                         [parent m-exemplos]
-                        [callback (lambda _ (expressao 6))]))
+                        [callback (lambda _ (exemplo 6))]))
+
+  ; Idempotente
+  (define m-idem (new menu-item%
+                      [label "Idempotente"]
+                      [parent m-regras]
+                      [callback (lambda _
+                                  (edit comm expr-atual-zip))]))
 
 
+  ;; Eventos do teclado
+  (new key-event% [key-code 'left])
 
+  (new key-event% [key-code 'right])
 
 
 
