@@ -3,9 +3,8 @@
   (require racket/gui
            "letras.rkt"
            "const.rkt")
-
-  (provide expr1 expr2 expr3 expr4 expr5 expr6
-           pp)
+  
+  (provide (all-defined-out))
   
   ;; Definindo expressões exemplos
   (define expr1 '("ou" "A" "B"))
@@ -36,6 +35,8 @@
                                    [(x3 y3) (print-var "fecha-par" tela x2 y)])
                                   (values x3 (min y1 y2 y3)))]
       [m (print-var m tela x y)]))
+
+
 
 
 

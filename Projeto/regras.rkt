@@ -1,12 +1,9 @@
 (module letras racket
 
-  (require racket/match)
+  (require racket/match
+           zippers)
 
-  (provide idem
-           comm
-           evid
-           dist
-           dm)
+  (provide (all-defined-out))
 
   ;; Definindo regras booleanas
 
@@ -28,7 +25,7 @@
       [`("ou" ,a ("e" ,a ,b)) `("e" ,a ("ou" 1 ,b))]))
 
   ; De Morgan
-  (define (dm expr)
+  (define (dmor expr)
     (match expr
       [`("not" ("ou" ,a ,b)) `("e" ("not" ,a) ("not" ,b))]
       [`("not" ("e" ,a ,b)) `("ou" ("not" ,a) ("not" ,b))]))
@@ -39,6 +36,25 @@
       [`("e" ,a ("ou" ,b ,c)) `("ou" ("e" ,a ,b) ("e" ,a ,c))]
       [`("ou" ,a ("e" ,b ,c)) `("e" ("ou" ,a ,b) ("ou" ,a ,c))]))
 
+
+  ;; Aplicação da regra
+  (define (apply-rule regra expr)
+    (cond
+      [(= regra 'idem) (edit idem expr)]
+      [(= regra 'comm) (edit comm expr)]
+      [(= regra 'evid) (edit evid expr)]
+      [(= regra 'dist) (edit dist expr)]
+      [(= regra 'dmor) (edit dmor expr)]))
+
+
+
+
+
+
+
+
+
+  
 
 
 

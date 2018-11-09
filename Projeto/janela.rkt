@@ -6,9 +6,14 @@
            "letras.rkt"
            "expressoes.rkt"
            "const.rkt"
-           "regras.rkt")
+           "regras.rkt"
+           "eventos.rkt")
+  
+  (provide (all-defined-out))
 
-  (provide f expr-atual)
+  ;; Expressão atual
+  (define expr-atual null)
+  (define expr-atual-zip null)
 
   ;; Janela
   (define f (new frame%
@@ -18,18 +23,25 @@
                  [alignment '(center center)]))
 
   ; Canvas para edição
-  (define my-canvas (new editor-canvas%
-                         [parent f]
-                         [style '(no-hscroll no-vscroll)]))
+  (define my-canvas%
+    (class editor-canvas%
+      (define/override (on-char key-event)
+        (cond
+          [(equal? key-event left-list) (left/list expr-atual-zip)]
+          [(equal? key-event right-list) (right/list expr-atual-zip)]
+          [(equal? key-event up-tree) (up expr-atual-zip)]
+          [(equal? key-event down-tree) (down/list-first expr-atual-zip)]))
+      (super-new)))
+  
+  (define canv (new my-canvas%
+                    [parent f]
+                    [style '(no-hscroll no-vscroll)]))
 
   ; Tipo de editor do canvas (pasteboard para uso de snip)
   (define pb (new pasteboard%))
-  (send my-canvas set-editor pb)
-
+  (send canv set-editor pb)
+  
   ;; Escolha das expressões exemplos e definição da expressão atual zipper
-  (define expr-atual null)
-  (define expr-atual-zip null)
-
   (define (exemplo item)
     (send pb erase)
     (cond
@@ -104,14 +116,33 @@
   (define m-idem (new menu-item%
                       [label "Idempotente"]
                       [parent m-regras]
-                      [callback (lambda _
-                                  (edit comm expr-atual-zip))]))
+                      [callback (lambda _ (apply-rule 'idem expr-atual-zip))]))
+  ; Comutativa
+  (define m-comm (new menu-item%
+                      [label "Comutativa"]
+                      [parent m-regras]
+                      [callback (lambda _ (apply-rule 'comm expr-atual-zip))]))
+
+  ; Evidência
+  (define m-evid (new menu-item%
+                      [label "Evidência"]
+                      [parent m-regras]
+                      [callback (lambda _ (apply-rule 'evid expr-atual-zip))]))
+
+  ; Distributiva
+  (define m-dist (new menu-item%
+                      [label "Distributiva"]
+                      [parent m-regras]
+                      [callback (lambda _ (apply-rule 'dist expr-atual-zip))]))
+
+  ; De Morgan
+  (define m-dmor (new menu-item%
+                      [label "De Morgan"]
+                      [parent m-regras]
+                      [callback (lambda _ (apply-rule 'dmor expr-atual-zip))]))
 
 
-  ;; Eventos do teclado
-  (new key-event% [key-code 'left])
-
-  (new key-event% [key-code 'right])
+  
 
 
 
