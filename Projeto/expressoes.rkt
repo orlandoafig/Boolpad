@@ -6,7 +6,7 @@
   
   (provide (all-defined-out))
   
-  ;; Definindo expressões exemplos
+  ;; Expressões exemplos
   (define expr1 '("ou" "A" "B"))
   (define expr2 '("ou" "A" ("e" "A" "B")))
   (define expr3 '("ou" "A" "A"))
@@ -14,7 +14,7 @@
   (define expr5 '("not" ("not" "A")))
   (define expr6 '("ou" ("not" ("e" "A" "B")) "A"))
 
-  ;; Imprimir expressão na tela
+  ;; Função que imprime expressão na tela
   (define (pp expr tela x y)
     (match expr
       [`("ou" ,m ,n) (let*-values ([(x1 y1) (pp m tela x y)]

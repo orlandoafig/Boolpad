@@ -38,13 +38,13 @@
 
 
   ;; Aplicação da regra
-  (define (apply-rule regra expr)
+  (define (apply-rule regra expr-zip)
     (cond
-      [(= regra 'idem) (edit idem expr)]
-      [(= regra 'comm) (edit comm expr)]
-      [(= regra 'evid) (edit evid expr)]
-      [(= regra 'dist) (edit dist expr)]
-      [(= regra 'dmor) (edit dmor expr)]))
+      [(equal? regra 'idem) (edit idem expr-zip)]
+      [(equal? regra 'comm) (edit comm expr-zip)]
+      [(equal? regra 'evid) (edit evid expr-zip)]
+      [(equal? regra 'dist) (edit dist expr-zip)]
+      [(equal? regra 'dmor) (edit dmor expr-zip)]))
 
 
 

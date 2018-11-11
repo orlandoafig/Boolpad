@@ -1,14 +1,17 @@
 (module eventos racket
 
-  (require racket/gui)
+  (require racket/gui
+           zippers)
 
   (provide (all-defined-out))
 
-  ;; Eventos do teclado
-  (define left-list (new key-event% [key-code 'left]))
-  (define right-list (new key-event% [key-code 'right]))
-  (define up-tree (new key-event% [key-code 'up]))
-  (define down-tree (new key-event% [key-code 'down]))
+  ;; Função que escolhe a ação do teclado
+  (define (move-in-tree expr-zip event)
+    (cond
+      [(equal? (send event get-key-code) 'left) (left/list expr-zip)]
+      [(equal? (send event get-key-code) 'right) (right/list expr-zip)]
+      [(equal? (send event get-key-code) 'up) (up expr-zip)]
+      [(equal? (send event get-key-code) 'down) (down/list-first expr-zip)]))
 
  
 

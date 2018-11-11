@@ -1,14 +1,12 @@
 (module letras racket
 
-  (provide ALTURA-JANELA LARGURA-JANELA
-           ALTURA-OBJETO LARGURA-OBJETO
-           ALTURA-EXPRESSAO ALTURA-BARRA)
+  (provide (all-defined-out))
 
   ;---------------------------------- Constantes ---------------------------------;
 
   ;; Dimensões da janela
-  (define ALTURA-JANELA 600)
-  (define LARGURA-JANELA 1000)
+  (define ALTURA-JANELA 700)
+  (define LARGURA-JANELA 1200)
 
 
   ; Dimensoes das imagens
@@ -19,6 +17,9 @@
 
   ;; Altura da expressão na tela
   (define ALTURA-EXPRESSAO (/ ALTURA-JANELA 3))
+
+  ;; Posição inicial das expressões
+  (define POSICAO-INICIAL 360)
 
 
 
