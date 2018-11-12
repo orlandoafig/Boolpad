@@ -11,7 +11,6 @@
   (provide (all-defined-out))
 
   ;; Expressão atual
-  (define expr-atual null)
   (define expr-atual-zip null)
 
   ;; Janela
@@ -37,6 +36,7 @@
   (send canv set-editor pb)
 
   (define (print-example item)
+    (define expr-atual null)
     (send pb erase)
     (cond
       [(= item 1)
