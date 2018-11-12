@@ -34,6 +34,7 @@
                                    [(x2 y2) (pp m tela x1 y)]
                                    [(x3 y3) (print-var "fecha-par" tela x2 y)])
                                   (values x3 (min y1 y2 y3)))]
+      [`("F" ,m) ()]
       [m (print-var m tela x y)]))
 
 
