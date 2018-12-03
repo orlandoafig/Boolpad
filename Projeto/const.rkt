@@ -13,6 +13,7 @@
   (define ALTURA-OBJETO 96)
   (define LARGURA-OBJETO 71)
   (define ALTURA-BARRA 10)
+  (define ALTURA-FOCO 96)
 
 
   ;; Altura da expressão na tela

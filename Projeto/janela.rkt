@@ -6,7 +6,9 @@
            "expressoes.rkt"
            "const.rkt"
            "regras.rkt"
-           "eventos.rkt")
+           "eventos.rkt"
+           "funcoesFoco.rkt"
+           "imprimeExpressao.rkt")
   
   (provide (all-defined-out))
 
@@ -24,7 +26,9 @@
   (define my-canvas%
     (class editor-canvas%
       (define/override (on-char key-event)
-        (set! expr-atual-zip (move-in-tree expr-atual-zip key-event)))
+        (send pb erase)
+        (set! expr-atual-zip (move-in-tree expr-atual-zip key-event))
+        (pp (rebuild expr-atual-zip) pb POSICAO-INICIAL ALTURA-EXPRESSAO))
       (super-new)))
   
   (define canv (new my-canvas%
@@ -40,24 +44,20 @@
     (send pb erase)
     (cond
       [(= item 1)
-         (pp expr1 pb POSICAO-INICIAL ALTURA-EXPRESSAO)
          (set! expr-atual expr1)]
       [(= item 2)
-         (pp expr2 pb POSICAO-INICIAL ALTURA-EXPRESSAO)
          (set! expr-atual expr2)]
       [(= item 3)
-         (pp expr3 pb POSICAO-INICIAL ALTURA-EXPRESSAO)
          (set! expr-atual expr3)]
       [(= item 4)
-         (pp expr4 pb POSICAO-INICIAL ALTURA-EXPRESSAO)
          (set! expr-atual expr4)]
       [(= item 5)
-         (pp expr5 pb POSICAO-INICIAL ALTURA-EXPRESSAO)
          (set! expr-atual expr5)]
       [(= item 6)
-         (pp expr6 pb POSICAO-INICIAL ALTURA-EXPRESSAO)
          (set! expr-atual expr6)])
-    (set! expr-atual-zip (zip expr-atual)))
+    (set! expr-atual (insere-foco expr-atual))
+    (set! expr-atual-zip (zip expr-atual))
+    (pp expr-atual pb POSICAO-INICIAL ALTURA-EXPRESSAO))
 
   ;; Menus
 
@@ -72,37 +72,37 @@
 
   ; Exemplo 1
   (define ex1 (new menu-item%
-                        [label "A + B"]
+                        [label "A + A"]
                         [parent m-exemplos]
                         [callback (lambda _ (print-example 1))]))
 
   ; Exemplo 2
   (define ex2 (new menu-item%
-                        [label "A + AB"]
+                        [label "A + 'A"]
                         [parent m-exemplos]
                         [callback (lambda _ (print-example 2))]))
 
   ; Exemplo 3
   (define ex3 (new menu-item%
-                        [label "A + A"]
+                        [label "A + AB"]
                         [parent m-exemplos]
                         [callback (lambda _ (print-example 3))]))
 
   ; Exemplo 4
   (define ex4 (new menu-item%
-                        [label "(A + B)"]
+                        [label "A + 'AB"]
                         [parent m-exemplos]
                         [callback (lambda _ (print-example 4))]))
 
   ; Exemplo 5
   (define ex5 (new menu-item%
-                        [label "'('A)"]
+                        [label "AB + 'AB"]
                         [parent m-exemplos]
                         [callback (lambda _ (print-example 5))]))
 
   ; Exemplo 6
   (define ex6 (new menu-item%
-                        [label "'(AB) + A"]
+                        [label "'(A + B)"]
                         [parent m-exemplos]
                         [callback (lambda _ (print-example 6))]))
 
@@ -110,30 +110,45 @@
   (define m-idem (new menu-item%
                       [label "Idempotente"]
                       [parent m-regras]
-                      [callback (lambda _ (set! expr-atual-zip (apply-rule 'idem expr-atual-zip)))]))
+                      [callback (lambda _
+                                  (send pb erase)
+                                  (set! expr-atual-zip (apply-rule 'idem expr-atual-zip))
+                                  (pp (rebuild expr-atual-zip) pb POSICAO-INICIAL ALTURA-EXPRESSAO))]))
   ; Comutativa
   (define m-comm (new menu-item%
                       [label "Comutativa"]
                       [parent m-regras]
-                      [callback (lambda _ (set! expr-atual-zip (apply-rule 'comm expr-atual-zip)))]))
+                      [callback (lambda _
+                                  (send pb erase)
+                                  (set! expr-atual-zip (apply-rule 'comm expr-atual-zip))
+                                  (pp (rebuild expr-atual-zip) pb POSICAO-INICIAL ALTURA-EXPRESSAO))]))
 
   ; Evidência
   (define m-evid (new menu-item%
                       [label "Evidência"]
                       [parent m-regras]
-                      [callback (lambda _ (set! expr-atual-zip (apply-rule 'evid expr-atual-zip)))]))
+                      [callback (lambda _
+                                  (send pb erase)
+                                  (set! expr-atual-zip (apply-rule 'evid expr-atual-zip))
+                                  (pp (rebuild expr-atual-zip) pb POSICAO-INICIAL ALTURA-EXPRESSAO))]))
 
   ; Distributiva
   (define m-dist (new menu-item%
                       [label "Distributiva"]
                       [parent m-regras]
-                      [callback (lambda _ (set! expr-atual-zip (apply-rule 'dist expr-atual-zip)))]))
+                      [callback (lambda _
+                                  (send pb erase)
+                                  (set! expr-atual-zip (apply-rule 'dist expr-atual-zip))
+                                  (pp (rebuild expr-atual-zip) pb POSICAO-INICIAL ALTURA-EXPRESSAO))]))
 
   ; De Morgan
   (define m-dmor (new menu-item%
                       [label "De Morgan"]
                       [parent m-regras]
-                      [callback (lambda _ (set! expr-atual-zip (apply-rule 'dmor expr-atual-zip)))]))
+                      [callback (lambda _
+                                  (send pb erase)
+                                  (set! expr-atual-zip (apply-rule 'dmor expr-atual-zip))
+                                  (pp (rebuild expr-atual-zip) pb POSICAO-INICIAL ALTURA-EXPRESSAO))]))
 
 
   

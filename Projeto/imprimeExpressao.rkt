@@ -1,18 +1,9 @@
-(module expressoes racket
+(module imprimeExpressao racket
 
-  (require racket/gui
-           "letras.rkt"
+  (require "letras.rkt"
            "const.rkt")
-  
+
   (provide (all-defined-out))
-  
-  ;; Expressões exemplos
-  (define expr1 '("ou" "A" "B"))
-  (define expr2 '("ou" "A" ("e" "A" "B")))
-  (define expr3 '("ou" "A" "A"))
-  (define expr4 '("group" ("ou" "A" "B")))
-  (define expr5 '("not" ("not" "A")))
-  (define expr6 '("ou" ("F" ("e" "A" "B")) "A"))
 
   ;; Função que imprime expressão na tela
   (define (pp expr tela x y)
@@ -24,6 +15,8 @@
       [`("e" ,m ,n) (let*-values ([(x1 y1) (pp m tela x y)]
                                   [(x2 y2) (pp n tela x1 y)])
                                  (values x2 (min y1 y2)))]
+      ["ou" (print-var "ou" tela x y)]
+      ["e" (values x y)]
       [`("not" ,m) (let*-values ([(x1 y1) (pp m tela x y)]
                                  [(x2 y2) (print-bar tela
                                                      (/ (- x1 x) LARGURA-OBJETO)
@@ -39,40 +32,11 @@
                                                    (/ (- x1 x) LARGURA-OBJETO)
                                                    x
                                                    (+ y1 ALTURA-FOCO))])
-                              (values x1 y2))]
+                              (values x1 y))]
       [m (print-var m tela x y)]))
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  )
+)

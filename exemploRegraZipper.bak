@@ -1,0 +1,4 @@
+#lang racket
+
+(require zippers
+         "C:/Users/Daniel/Documents/Boolpad/Projeto/regras.rkt")

@@ -1,0 +1,14 @@
+(module funcoesFoco racket
+
+  (provide (all-defined-out))
+
+  (define (insere-foco expr)
+    (append "F" expr))
+
+
+
+
+
+
+
+  )

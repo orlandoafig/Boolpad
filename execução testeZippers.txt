@@ -1,0 +1,49 @@
+> (right/list
+   (down/list-first
+    (right/list (right/list
+                 (down/list-first
+                  (right/list
+                   (down/list-first deep)))))))
+(zipper
+ "C"
+ (list
+  (list-item-frame '("ou") '("D" "E"))
+  (list-item-frame '("A" "e") '())
+  (list-item-frame '("ou") '("B" ("e" "A" "B")))))
+
+> (right/list (right/list
+(right/list
+   (down/list-first
+    (right/list (right/list
+                 (down/list-first
+                  (right/list
+                   (down/list-first deep)))))))))
+(zipper
+ "E"
+ (list
+  (list-item-frame '("D" "C" "ou") '())
+  (list-item-frame '("A" "e") '())
+  (list-item-frame '("ou") '("B" ("e" "A" "B")))))
+
+> (edit (lambda (f) (list "F" f)) (right/list (right/list
+(right/list
+   (down/list-first
+    (right/list (right/list
+                 (down/list-first
+                  (right/list
+                   (down/list-first deep))))))))))
+(zipper
+ '("F" "E")
+ (list
+  (list-item-frame '("D" "C" "ou") '())
+  (list-item-frame '("A" "e") '())
+  (list-item-frame '("ou") '("B" ("e" "A" "B")))))
+  
+> (rebuild (edit (lambda (f) (list "F" f)) (right/list (right/list
+(right/list
+   (down/list-first
+    (right/list (right/list
+                 (down/list-first
+                  (right/list
+                   (down/list-first deep)))))))))))
+'("ou" ("e" "A" ("ou" "C" "D" ("F" "E"))) "B" ("e" "A" "B"))

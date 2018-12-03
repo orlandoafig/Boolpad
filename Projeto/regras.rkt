@@ -1,7 +1,8 @@
 (module letras racket
 
   (require racket/match
-           zippers)
+           zippers
+           "funcoesFoco.rkt")
 
   (provide (all-defined-out))
 
@@ -22,7 +23,7 @@
   ; Evidência
   (define (evid expr)
     (match expr
-      [`("ou" ,a ("e" ,a ,b)) `("e" ,a ("ou" 1 ,b))]))
+      [`("ou" ,a ("e" ,a ,b)) `("e" ,a ("ou" "1" ,b))]))
 
   ; De Morgan
   (define (dmor expr)
@@ -39,12 +40,14 @@
 
   ;; Aplicação da regra
   (define (apply-rule regra expr-zip)
+    (set! expr-zip (edit retira-foco expr-zip))
     (cond
-      [(equal? regra 'idem) (edit idem expr-zip)]
-      [(equal? regra 'comm) (edit comm expr-zip)]
-      [(equal? regra 'evid) (edit evid expr-zip)]
-      [(equal? regra 'dist) (edit dist expr-zip)]
-      [(equal? regra 'dmor) (edit dmor expr-zip)]))
+      [(equal? regra 'idem) (edit insere-foco (edit idem expr-zip))]
+      [(equal? regra 'comm) (edit insere-foco (edit comm expr-zip))]
+      [(equal? regra 'evid) (edit insere-foco (edit evid expr-zip))]
+      [(equal? regra 'dist) (edit insere-foco (edit dist expr-zip))]
+      [(equal? regra 'dmor) (edit insere-foco (edit dmor expr-zip))]
+      [else (edit insere-foco expr-zip)]))
 
 
 
