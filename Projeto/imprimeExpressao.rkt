@@ -15,8 +15,6 @@
       [`("e" ,m ,n) (let*-values ([(x1 y1) (pp m tela x y)]
                                   [(x2 y2) (pp n tela x1 y)])
                                  (values x2 (min y1 y2)))]
-      ["ou" (print-var "ou" tela x y)]
-      ["e" (values x y)]
       [`("not" ,m) (let*-values ([(x1 y1) (pp m tela x y)]
                                  [(x2 y2) (print-bar tela
                                                      (/ (- x1 x) LARGURA-OBJETO)
