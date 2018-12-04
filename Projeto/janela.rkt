@@ -106,6 +106,24 @@
                         [parent m-exemplos]
                         [callback (lambda _ (print-example 6))]))
 
+  ; Identidade
+  (define m-iden (new menu-item%
+                      [label "Identidade"]
+                      [parent m-regras]
+                      [callback (lambda _
+                                  (send pb erase)
+                                  (set! expr-atual-zip (apply-rule 'iden expr-atual-zip))
+                                  (pp (rebuild expr-atual-zip) pb POSICAO-INICIAL ALTURA-EXPRESSAO))]))
+
+  ; Absorção
+  (define m-absor (new menu-item%
+                      [label "Absorção"]
+                      [parent m-regras]
+                      [callback (lambda _
+                                  (send pb erase)
+                                  (set! expr-atual-zip (apply-rule 'absor expr-atual-zip))
+                                  (pp (rebuild expr-atual-zip) pb POSICAO-INICIAL ALTURA-EXPRESSAO))]))
+
   ; Idempotente
   (define m-idem (new menu-item%
                       [label "Idempotente"]
